@@ -309,7 +309,7 @@ int main()
     //Different CCX (same NUMA, same Package)
     if (cpuInfo.L3CacheCount > 1 && cpuInfo.getL3PerPackage() > 1 && cpuInfo.getL3PerNUMANode() > 1) {
         //Measure latency to another core (different CCX)
-        time = measureLatency(16);
+        time = measureLatency(cpuInfo.getThreadsPerCore() * cpuInfo.getCoresPerL3());
         cout << "Other CCX   : " << (time / iterations) / cpuInfo.ticksPerNanosecond << " ns" << endl;
     }
 
